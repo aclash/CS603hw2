@@ -64,4 +64,8 @@ public class FuzzingService {
         }
         return res;
     }
+
+    public String InsertHTML(String str){
+        return getTagInserter().fuzz(str);
+    }
 }

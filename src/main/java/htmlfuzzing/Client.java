@@ -1,6 +1,7 @@
 package htmlfuzzing;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
+import org.jsoup.safety.Whitelist;
 
 public class Client {
     public static void main(String[] args) {
@@ -33,9 +34,19 @@ public class Client {
                 e.getStackTrace();
             }
         }
+        System.out.println("*************Creation Success!!!******************");
     }
 
     public static void TestClean(FuzzingService service){
-
+        for (int i = 0; i < testNum; ++i){
+            try {
+                String unsafe = "<p><a href='http://example.com/' onclick='stealCookies()'>Link</a></p>";
+                String fuzzedHtml = service.InsertHTML(unsafe);
+                String safe = Jsoup.clean(fuzzedHtml, Whitelist.basic());
+            }catch(Exception e){
+                e.getStackTrace();
+            }
+        }
+        System.out.println("*************Clean Success!!!******************");
     }
 }

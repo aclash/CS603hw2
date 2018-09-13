@@ -3,6 +3,10 @@ import htmlfuzzing.spi.Fuzzer;
 public class ScriptTagInserter implements Fuzzer{
     @Override
     public String fuzz(String str){
-        return "ScriptTagInserter";
+        String extraStr = "<script type=\"text/javascript\">\n" +
+                "document.write(\"Hello World!\")\n" +
+                "</script>";
+        String res = new StringBuilder(str).insert(3 % str.length(), extraStr).toString();
+        return res;
     }
 }

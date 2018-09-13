@@ -3,6 +3,7 @@ import htmlfuzzing.spi.Fuzzer;
 public class TagRemover implements Fuzzer{
     @Override
     public String fuzz(String str){
-        return "TagRemover";
+        String res = str.replaceFirst("<[^>]+>",""); //remove the first tag
+        return res;
     }
 }

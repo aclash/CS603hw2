@@ -20,7 +20,7 @@ public class TagReplacer implements Fuzzer{
         int rdIndex = rand.nextInt(list.size());                //randomly pick a tag to replace, it could be <xxx> or <xxx/>
         String res1 = str.substring(0, list.get(rdIndex));
         String res2 = str.substring(list.get(rdIndex));
-        res2 = res2.replaceFirst("(<[^>]+>)|(<[^>]+/>)","</script>"); //replace the start tag or close tag
+        res2 = res2.replaceFirst("(<[^>]+>)|(<[^>]+/>)","</script>");   //replace the start tag or close tag
         return res1 + res2;
     }
 }

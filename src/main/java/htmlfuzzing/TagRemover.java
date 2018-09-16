@@ -16,7 +16,7 @@ public class TagRemover implements Fuzzer{
             list.add(m.start());                                //find all the tag and put into arraylist
         }
         Random rand = new Random();
-        int rdIndex = rand.nextInt(list.size());                //randomly pick a tag could be <xxx> or <xxx/>
+        int rdIndex = rand.nextInt(list.size());                //randomly pick a tag to remove, it could be <xxx> or <xxx/>
         String res1 = str.substring(0, list.get(rdIndex));
         String res2 = str.substring(list.get(rdIndex));
         res2 = res2.replaceFirst("(<[^>]+>)|(<[^>]+/>)",""); //remove the start tag or close tag

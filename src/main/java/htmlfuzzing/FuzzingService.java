@@ -1,15 +1,22 @@
 package htmlfuzzing;
 import htmlfuzzing.spi.Fuzzer;
-import java.util.Random;
-import java.util.ServiceLoader;
+
+import java.util.*;
+
 
 public class FuzzingService {
     private static FuzzingService service;
     private ServiceLoader<Fuzzer> loader;
     private static final int combinedNum = 3;
+    private List<Fuzzer> services;
 
     private FuzzingService() {
         loader = ServiceLoader.load(Fuzzer.class);
+        services = new ArrayList<>();
+        Iterator<Fuzzer> iter = loader.iterator();
+        while (iter.hasNext()) {
+            services.add(iter.next());
+        }
     }
 
     public static synchronized FuzzingService getInstance() {
@@ -25,6 +32,7 @@ public class FuzzingService {
                return fu;
         }
         return null;
+
     }
 
     private Fuzzer getTagRemover(){
@@ -33,6 +41,7 @@ public class FuzzingService {
                 return fu;
         }
         return null;
+
     }
 
     private Fuzzer getTagReplacer(){
